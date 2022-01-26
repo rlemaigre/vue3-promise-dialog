@@ -1,4 +1,10 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
+import PrimeVue from 'primevue/config';
+import "primevue/resources/themes/mdc-light-indigo/theme.css";
+import "primevue/resources/primevue.min.css";
+import "primeicons/primeicons.css";
 
-createApp(App).mount('#app')
+let app = createApp(App);
+app.use(PrimeVue);
+app.mount('#app')

@@ -1,13 +1,14 @@
 <template>
-  test
+  <DialogWrapper :transition-attrs="{name: 'dialog'}"/>
 </template>
 
 <script lang="ts">
 
 import {defineComponent} from "vue";
+import DialogWrapper from "./core/components/DialogWrapper.vue";
 
 export default defineComponent({
-  components: {},
+  components: {DialogWrapper},
   props: {},
   setup(props, context) {
     return {}

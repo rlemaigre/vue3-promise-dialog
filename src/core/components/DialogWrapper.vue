@@ -1,6 +1,6 @@
 <template>
   <transition v-bind="transitionAttrs">
-    <component :is="dialogRef.dialog" v-if="dialogRef"></component>
+    <component :is="dialogRef.dialog" v-if="dialogRef && dialogRef.wrapper === name"></component>
   </transition>
 </template>
 
@@ -12,6 +12,10 @@ import {dialogRef} from "../ts/lib";
 export default defineComponent({
   components: {},
   props: {
+    name: {
+      type: String,
+      default: 'default'
+    },
     transitionAttrs: Object
   },
   setup(props, context) {
