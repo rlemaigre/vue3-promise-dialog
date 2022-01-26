@@ -44,5 +44,11 @@ That approach has several disadvantages :
 
 ## Content of this repository
 
-You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs). This repository demonstrates how the basic functionality of that great project can be easily recovered in Vue 3. The code is so simple it isn't published on NPM. It is explained in this README, copy it in your own project and customize it as you see fit to create your own dialogs. The core functionality is in the lib folder.
+You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs). This repository demonstrates how the basic functionality of that great project can be easily recovered in Vue 3. The code is so simple it isn't published on NPM. It is explained in this README, copy it in your own project and customize it as you see fit to create your own dialogs.
+
+## Directory structure
+
+The core functionality is in the lib folder. There are only two small files : lib.ts and DialogWrapper.vue. You may to copy those two files as is to your own project.
+
+An example of a small dialog collection built upon the core functionality is in the dialogs folder. It uses PrimeVue components for buttons and text boxes.
 

@@ -1,5 +1,4 @@
 <template>
-  test
 </template>
 
 <script lang="ts">
@@ -16,5 +15,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "src/scss/global.scss";
 
 </style>
