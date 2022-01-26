@@ -10,6 +10,7 @@ import {defineComponent} from "vue";
 import {dialogRef} from "../ts/lib";
 
 export default defineComponent({
+  name: 'DialogWrapper',
   components: {},
   props: {
     name: {
