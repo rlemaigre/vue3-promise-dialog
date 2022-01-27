@@ -61,6 +61,5 @@ paste it in your own project and customize it as you see fit.
 The core functionality is in the lib folder. There are only two small files : lib.ts and DialogWrapper.vue. These two
 files are published on NPM.
 
-An example of a small dialog collection built upon the core functionality is in the dialogs folder. It uses PrimeVue
-components for buttons and text boxes.
+An example of a small dialog collection built upon the core functionality is in the dialogs folder. It is not published on NPM since it is dependent on PrimeVue component library which you may not be using and the look and feel you may be aiming for for your own dialog may differ. Use it as inspiration to build you own dialog collection. 
 
