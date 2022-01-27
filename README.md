@@ -54,7 +54,7 @@ That approach has several disadvantages :
 You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs).
 This repository demonstrates how the basic functionality of that great project can be easily recovered in Vue 3. The
 code is published on NPM but it is so simple (60 lines of code for the core functionality !) you might as well copy
-paste it in your own project.
+paste it in your own project and customize it as you see fit.
 
 ## Directory structure
 

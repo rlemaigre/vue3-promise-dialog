@@ -1,21 +1,36 @@
 {
-  "name": "my-vue-app",
-  "version": "0.0.0",
+  "name": "vue3-promise-dialog",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue3-promise-dialog.umd.js",
+  "types": "dist/index.d.ts",
+  "module": "./dist/vue3-promise-dialog.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-promise-dialog.es.js",
+      "require": "./dist/vue3-promise-dialog.umd.js"
+    }
+  },
   "dependencies": {
-    "vue": "^3.2.25"
+    "primeicons": "^5.0.0",
+    "primevue": "^3.11.0",
+    "tslib": "^2.3.1",
+    "vue": "^3.2.26"
   },
   "devDependencies": {
+    "@types/node": "^17.0.12",
     "@vitejs/plugin-vue": "^2.0.0",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2",
-    "vue-tsc": "^0.29.8",
-    "primeflex": "^3.1.2",
-    "primeicons": "^5.0.0",
-    "primevue": "^3.11.0"
+    "sass": "^1.46.0",
+    "typescript": "^4.5.5",
+    "vite": "^2.7.13",
+    "vue-tsc": "^0.31.1",
+    "rollup-plugin-typescript2": "^0.31.1"
   }
 }
