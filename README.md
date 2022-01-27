@@ -113,7 +113,7 @@ let text = await promptText('Please enter some text');
 
 ### Closing dialogs
 
-
+Inside your dialog components, you may call `closeDialog(...)` when you want to close the dialog and resolve the promise. The promise will resolve with whatever value you passed to `closeDialog`.
 
 
 
