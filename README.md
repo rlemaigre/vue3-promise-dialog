@@ -62,9 +62,9 @@ That approach has several disadvantages :
 ## Content of this repository
 
 You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs).
-This repository demonstrates how the basic functionality of that great project can be easily recovered in Vue 3. The
-code is published on NPM but it is so simple (60 lines of code for the core functionality !) you might as well copy
-paste it in your own project and customize it as you see fit.
+Unfortunatly it hasn't been ported to Vue 3. This repository demonstrates how the basic functionality of that project
+can be easily recovered in Vue 3. The code is published on NPM but it is so simple (60 lines of code for the core
+functionality !) you might as well copy paste it in your own project and customize it as you see fit.
 
 ## Directory structure
 
@@ -73,25 +73,30 @@ files are published on NPM.
 
 An example of a small dialog collection built upon the core functionality is in the dialogs folder. It is not published
 on NPM since it is dependent on PrimeVue component library which you may not be using and the look and feel you may be
-aiming for for your own dialogs may differ. Use it as inspiration to build you own dialog collection.
+aiming for for your own dialogs may differ. Use it as inspiration to build your own dialog collection.
 
 ## Using the library
 
 ### DialogWrapper
 
 Your dialogs will open inside a `DialogWrapper` component. Include the `DialogWrapper` component at the root of your vue
-app, after all other content. Internally `DialogWrapper` uses a transition tag to transition your dialogs in and out
-of view. Use the `transitionAttrs` prop to control the transition : the value of that prop will be v-binded as is to the transition tag inside the wrapper. So for example to set the name of the transition to `dialog`, use `:transition-attrs="{name: 'dialog'}"`.
+app, after all other content. Internally `DialogWrapper` uses a transition tag to transition your dialogs in and out of
+view. Use the `transitionAttrs` prop to control the transition : the value of that prop will be v-binded as is to the
+transition tag inside the wrapper. So for example to set the name of the transition to `dialog`,
+use `:transition-attrs="{name: 'dialog'}"`.
 
 ### Opening dialogs
 
-For each of your dialogs, you must define an async function that will transition the dialog into view, and return whatever value the user entered. To do so, use the `openDialogFunction` helper. For example, suppose you have a `TextBox` dialog, with a `label` prop that prompts the user for a text. This is how you may define the async function that will open it :
+For each of your dialogs, you must define an async function that will transition the dialog into view, and return
+whatever value the user entered. To do so, use the `openDialogFunction` helper. For example, suppose you have
+a `TextBox` dialog, with a `label` prop that prompts the user for a text. This is how you may define the async function
+that will open it :
 
 ```typescript
 export const openTextDialog = openDialogFunction<{ label: string }, string>(TextBox);
 ```
 
-Use the function like so :
+Use the function like so whenever you want to open the dialog and await the result :
 
 ```typescript
 let text = await openTextDialog({label: 'Please enter some text'})
@@ -113,7 +118,8 @@ let text = await promptText('Please enter some text');
 
 ### Closing dialogs
 
-Inside your dialog components, you may call `closeDialog(...)` when you want to close the dialog and resolve the promise. The promise will resolve with whatever value you passed to `closeDialog`.
+Inside your dialog components, you may call `closeDialog(...)` when you want to close the dialog and resolve the
+promise. The promise will resolve with whatever value you passed to `closeDialog`.
 
 
 
