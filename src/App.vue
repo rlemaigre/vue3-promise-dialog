@@ -1,5 +1,5 @@
 <template>
-  <Button @click="onTestConfirm" label="Open confirm"></Button>
+  <Button @click="onTestConfirm" label="Test confirm dialog"></Button>
   <div class="console">
     <div class="console-item" v-for="(text, index) in items" :key="index">{{ text }}</div>
   </div>
@@ -37,9 +37,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
+.console {
+  margin: 20px;
+}
 </style>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
 </style>

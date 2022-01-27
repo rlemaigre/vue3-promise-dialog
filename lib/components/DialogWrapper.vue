@@ -1,6 +1,7 @@
 <template>
   <transition v-bind="transitionAttrs">
-    <component :is="dialogRef.dialog" v-if="dialogRef && dialogRef.wrapper === name"></component>
+    <component :is="dialogRef.dialog" v-if="dialogRef && dialogRef.wrapper === name"
+               v-bind="dialogRef.props"></component>
   </transition>
 </template>
 

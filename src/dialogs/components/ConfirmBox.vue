@@ -1,8 +1,10 @@
 <template>
-  <OkCancelBox :value="true">
+  <OkCancelBox :value="true" ok-label="YES" cancel-label="NO">
     <template #header>Confirm</template>
     <template #body>
-      {{ text }}
+      <div style="margin: 20px">
+        {{ text }}
+      </div>
     </template>
   </OkCancelBox>
 </template>

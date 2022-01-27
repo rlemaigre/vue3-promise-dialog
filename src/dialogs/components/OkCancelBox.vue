@@ -8,9 +8,9 @@
         <slot name="body"></slot>
       </div>
       <div class="footer">
-        <Button label="Cancel" type="button" class="p-button-raised" style="margin-right: 10px"
+        <Button :label="cancelLabel" type="button" class="p-button-raised" style="margin-right: 10px"
                 @click="closeDialog(null)"/>
-        <Button label="Ok" type="submit" class="p-button-raised" @click="closeDialog(value)" :disabled="!valid"/>
+        <Button :label="okLabel" type="submit" class="p-button-raised" @click="closeDialog(value)" :disabled="!valid"/>
       </div>
     </form>
   </Box>
@@ -28,6 +28,14 @@ export default defineComponent({
     valid: {
       type: Boolean,
       default: true
+    },
+    okLabel: {
+      type: String,
+      default: 'OK'
+    },
+    cancelLabel: {
+      type: String,
+      default: 'CANCEL'
     }
   },
   setup(props, context) {
@@ -47,6 +55,7 @@ export default defineComponent({
     align-items: center;
     height: 50px;
     padding: 10px;
+    font-size: 20px;
   }
 
   .footer {
