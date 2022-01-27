@@ -4,7 +4,11 @@ import PrimeVue from 'primevue/config';
 import "primevue/resources/themes/mdc-light-indigo/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
+import Button from "primevue/button";
+import InputText from "primevue/inputtext";
 
 let app = createApp(App);
 app.use(PrimeVue);
+app.component("Button", Button);
+app.component("InputText", InputText);
 app.mount('#app')
