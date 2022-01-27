@@ -11,6 +11,7 @@ const name = pkg.name;
 const external = Object.keys(pkg.dependencies || {});
 
 export default defineConfig({
+    base: '',
     server: {
         port: 8080
     },
