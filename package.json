@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && tsc lib/ts/lib.ts --declaration --emitDeclarationOnly --outDir dist",
     "preview": "vite preview"
   },
   "files": [
     "dist"
   ],
   "main": "./dist/vue3-promise-dialog.umd.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/lib.d.ts",
   "module": "./dist/vue3-promise-dialog.es.js",
   "exports": {
     ".": {
