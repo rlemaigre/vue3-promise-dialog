@@ -1,5 +1,6 @@
 <template>
-  <Button @click="onTestConfirm" label="Test confirm dialog"></Button>
+  <Button @click="onTestConfirm" label="Test confirm dialog" class="m-3"></Button>
+  <Button @click="onTestText" label="Test prompt text dialog" class="m-3"></Button>
   <div class="console">
     <div class="console-item" v-for="(text, index) in items" :key="index">{{ text }}</div>
   </div>
@@ -10,7 +11,7 @@
 
 import {defineComponent, reactive} from "vue";
 import DialogWrapper from "../lib/components/DialogWrapper.vue";
-import {confirm} from "./dialogs/ts/dialogs";
+import {confirm, promptText} from "./dialogs/ts/dialogs";
 
 
 export default defineComponent({
@@ -27,9 +28,17 @@ export default defineComponent({
       }
     }
 
+    async function onTestText() {
+      let text = await promptText('Enter some text');
+      if (text) {
+        items.push(text)
+      }
+    }
+
     return {
       confirm,
       onTestConfirm,
+      onTestText,
       items
     }
   }

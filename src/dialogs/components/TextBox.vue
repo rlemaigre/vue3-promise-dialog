@@ -1,8 +1,13 @@
 <template>
-  <OkCancelBox :value="text" :valid="text">
+  <OkCancelBox :value="text" :valid="!!text">
     <template #header>Input</template>
     <template #body>
-      <InputText v-model="text"></InputText>
+      <div style="padding: 20px">
+        <span class="p-float-label">
+            <InputText id="username" type="text" v-model="text"/>
+            <label for="username">{{ label }}</label>
+        </span>
+      </div>
     </template>
   </OkCancelBox>
 </template>
@@ -13,7 +18,9 @@ import OkCancelBox from "./OkCancelBox.vue";
 
 export default defineComponent({
   components: {OkCancelBox},
-  props: {},
+  props: {
+    label: String
+  },
   setup(props, context) {
     const text = ref("");
     return {

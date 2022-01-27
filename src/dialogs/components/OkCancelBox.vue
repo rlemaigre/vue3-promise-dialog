@@ -62,6 +62,8 @@ export default defineComponent({
     display: flex;
     justify-content: flex-end;
     padding: 10px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 }
 </style>

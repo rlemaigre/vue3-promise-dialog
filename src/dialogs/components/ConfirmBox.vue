@@ -2,7 +2,7 @@
   <OkCancelBox :value="true" ok-label="YES" cancel-label="NO">
     <template #header>Confirm</template>
     <template #body>
-      <div style="margin: 20px">
+      <div style="padding: 20px;">
         {{ text }}
       </div>
     </template>
