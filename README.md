@@ -24,8 +24,8 @@ https://rlemaigre.github.io/vue3-promise-dialog/
 
 ### Dialogs the usual way
 
-If you need to use a dialog in a parent component, you do it by altering its script and template, something along those
-lines :
+If you need to use a dialog in a parent component, you usually do it by altering its script and template, something
+along those lines :
 
 ```html
 
@@ -43,7 +43,8 @@ That approach has several disadvantages :
 
 * It is verbose.
 * A dialog can only be opened from a parent Vue component, not from a JS/TS file.
-* There is no symmetry between requesting data from the user and from the server, yet it is the same kind of asynchronous process that yields a value.
+* There is no symmetry between requesting data from the user and from the server, yet it is the same kind of
+  asynchronous process that yields a value.
 * Everywhere you need to use the dialog, you need to set up some logic in the parent component :
     * The dialog tag in the template
     * A ref that controls the dialog visibility
@@ -92,12 +93,12 @@ functionality !) you might as well copy paste it into your own project and custo
 
 ## Directory structure
 
-The core functionality is in the `lib` folder. There are only two small files : `lib.ts` and `DialogWrapper.vue`. These two
-files are published on NPM.
+The core functionality is in the `lib` folder. There are only two small files : `lib.ts` and `DialogWrapper.vue`. These
+two files are published on NPM.
 
-An example of a small dialog collection built upon the core functionality is in the src/dialogs folder. It is not published
-on NPM since it is dependent on PrimeVue component library which you may not be using and the look and feel you may be
-aiming for for your own dialogs may differ. Use it as inspiration to build your own dialog collection.
+An example of a small dialog collection built upon the core functionality is in the src/dialogs folder. It is not
+published on NPM since it is dependent on PrimeVue component library which you may not be using and the look and feel
+you may be aiming for for your own dialogs may differ. Use it as inspiration to build your own dialog collection.
 
 ## Using the library
 
@@ -110,11 +111,12 @@ transition tag inside the wrapper. So for example to set the name of the transit
 use `:transition-attrs="{name: 'dialog'}"`.
 
 ```html
+
 <template>
-  <div id="app">
-    <!-- your content -->
-    <DialogWrapper :transition-attrs="{name: 'dialog'}"/>
-  </div>
+    <div id="app">
+        <!-- your content -->
+        <DialogWrapper :transition-attrs="{name: 'dialog'}"/>
+    </div>
 </template>
 ```
 
@@ -122,9 +124,8 @@ use `:transition-attrs="{name: 'dialog'}"`.
 
 To turn your dialogs components into async functions that return promises, use `openDialogFunction` helper.
 
-For example, suppose you have
-a `TextBox` dialog, with a `label` prop that prompts the user for a text. This is how you may define the async function
-that will open it :
+For example, suppose you have a `TextBox` dialog, with a `label` prop that prompts the user for a text. This is how you
+may define the async function that will open it :
 
 ```typescript
 export const openTextDialog = openDialogFunction<{ label: string }, string>(TextBox);
