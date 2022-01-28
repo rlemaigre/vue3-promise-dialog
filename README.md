@@ -6,6 +6,10 @@ This project does not provide any dialogs. Rather, it makes it easy to create yo
 promises. The dialogs can be opened by calling a function that returns a promise and once the user enters data into the
 dialog and closes it, the promise resolves with the data the user entered.
 
+```typescript
+let data = await openMyDialog();
+```
+
 ## Installation
 
 ```
