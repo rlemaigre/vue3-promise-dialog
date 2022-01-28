@@ -39,12 +39,12 @@ That approach has several disadvantages :
 
 * It is verbose.
 * A dialog can only be opened from a parent Vue component, not from a JS/TS file.
-* There is no symmetry between requesting data from the user and from the server.
+* There is no symmetry between requesting data from the user and from the server, yet it is the same kind of asynchronous process that yields a value.
 * Everywhere you need to use the dialog, you need to set up some logic in the parent component :
     * The dialog tag in the template
     * A ref that controls the dialog visibility
     * Callbacks that handle clicks on dialog buttons
-    * ...things get nasty when a parent component needs to use several dialogs.
+* Things get nasty when a parent component needs to use several dialogs.
 
 ### Dialogs using promises
 
@@ -71,12 +71,12 @@ if (ok) {
 You open the dialog by calling a function that returns a promise. The promise resolves to the value the user entered
 into the dialog when it is closed.
 
-That approach has several sadvantages :
+That approach has several advantages :
 
 * It is concise.
-* A dialog can be opened from a parent Vue component, or not from a JS/TS file. It's just a function call.
-* There is a symmetry between requesting data from the user and from the server.
-* No need to alter the code of a parent component to accomodate for the presence of the dialog.
+* A dialog can be opened from a parent Vue component, or not from any JS/TS file. It's just a function call.
+* There is symmetry between requesting data from the user and from the server.
+* No need to alter the code of a parent component to accommodate for the presence of the dialog.
 * A parent component can use many dialogs without becoming a mess.
 
 ## Content of this repository
@@ -84,14 +84,14 @@ That approach has several sadvantages :
 You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs).
 Unfortunately it hasn't been ported to Vue 3. This repository demonstrates how the basic functionality of that project
 can be easily recovered in Vue 3. The code is published on NPM but it is so simple (60 lines of code for the core
-functionality !) you might as well copy paste it in your own project and customize it as you see fit.
+functionality !) you might as well copy paste it into your own project and customize it as you see fit.
 
 ## Directory structure
 
-The core functionality is in the lib folder. There are only two small files : lib.ts and DialogWrapper.vue. These two
+The core functionality is in the `lib` folder. There are only two small files : `lib.ts` and `DialogWrapper.vue`. These two
 files are published on NPM.
 
-An example of a small dialog collection built upon the core functionality is in the dialogs folder. It is not published
+An example of a small dialog collection built upon the core functionality is in the src/dialogs folder. It is not published
 on NPM since it is dependent on PrimeVue component library which you may not be using and the look and feel you may be
 aiming for for your own dialogs may differ. Use it as inspiration to build your own dialog collection.
 
@@ -105,10 +105,20 @@ view. Use the `transitionAttrs` prop to control the transition : the value of th
 transition tag inside the wrapper. So for example to set the name of the transition to `dialog`,
 use `:transition-attrs="{name: 'dialog'}"`.
 
+```html
+<template>
+  <div id="app">
+    <!-- your content -->
+    <DialogWrapper :transition-attrs="{name: 'dialog'}"/>
+  </div>
+</template>
+```
+
 ### Opening dialogs
 
-For each of your dialogs, you must define an async function that will transition the dialog into view, and return
-whatever value the user entered. To do so, use the `openDialogFunction` helper. For example, suppose you have
+To turn your dialogs components into async functions that return promises, use `openDialogFunction` helper.
+
+For example, suppose you have
 a `TextBox` dialog, with a `label` prop that prompts the user for a text. This is how you may define the async function
 that will open it :
 
@@ -122,7 +132,7 @@ Use the function like so whenever you want to open the dialog and await the resu
 let text = await openTextDialog({label: 'Please enter some text'})
 ```
 
-You may further refine the process of opening a prompt by declaring this function :
+If you think this isn't concise enough you may declare this additional function :
 
 ```typescript
 export async function promptText(label: string) {
