@@ -177,13 +177,13 @@ The Box.vue component defines the look and feel of all dialogs : a white div cen
 also defines the way dialogs transition in and out of view, with a fade-in effect for the background and a scale effect
 for the centered div. It has one slot which is the content of the centered div.
 
-### OkCanCelBox.vue
+### OkCancelBox.vue
 
 The OkCancelBox.vue component serves as base for all dialogs that include OK and CANCEL buttons. It has two
 slots : `header` and `body`. Body is where the controls of the dialog reside. It has two props : `value` and `valid`
 . `value` defines what the promise must resolve to when the ok button is clicked. It is a summary of the current values
 in the controls located in the body slot provided by the parent component. `valid` defines if the value is valid. The Ok
-button is disabled with valid is false. The whole thing is included into a `form` tag so that hitting enter with a
+button is disabled with valid is false. The whole thing is included into a `form` tag so that hitting enter when a
 control has focus triggers a click on the OK button. When OK is clicked, the `closeDialog` function is called with value
 as parameter, which closes the dialog and resolves the promise. When CANCEL is clicked, the `closeDialog` function is
 called with null as parameter.
