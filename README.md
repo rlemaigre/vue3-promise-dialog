@@ -2,6 +2,10 @@
 
 Dialogs meet promises in Vue 3 !
 
+This project does not provide any dialogs. Rather, it makes it easy to create your own dialogs and work with them using
+promises. The dialogs can be opened by calling a function that returns a promise and once the user enters data into the
+dialog and closes it, the promise resolves with the data the user entered.
+
 ## Installation
 
 ```
@@ -14,27 +18,10 @@ https://rlemaigre.github.io/vue3-promise-dialog/
 
 ## Introduction
 
-As we all know, requesting data from the server is an asynchronous process that is best handled with promises. For
-example the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is a promise based API.
+### Dialogs the usual way
 
-```javascript
-let response = await fetch('http://example.com/movies.json');
-```
-
-Now, just like fetching data from the server, requesting data _from the user_ using a dialog is also an asynchronous
-process that may complete with a value at some point in the future when the user closes the dialog. Why would the API to
-fetch data from the user be any different than the API to fetch data from the server ?
-
-Opening a confirm dialog box should then be as simple as this :
-
-```javascript
-let ok = await confirm('Are you sure you want to do this ?');
-if (ok) {
-    // Do something
-}
-```
-
-Compare that to the usual approach to working with Dialogs :
+If you need to use a dialog in a parent component, you do it by altering its script and template, something along those
+lines :
 
 ```html
 
@@ -59,10 +46,43 @@ That approach has several disadvantages :
     * Callbacks that handle clicks on dialog buttons
     * ...things get nasty when a parent component needs to use several dialogs.
 
+### Dialogs using promises
+
+As we all know, requesting data from the server is an asynchronous process that is best handled with promises. For
+example the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is a promise based API.
+
+```javascript
+let response = await fetch('http://example.com/movies.json');
+```
+
+Now, just like fetching data from the server, requesting data _from the user_ using a dialog is also an asynchronous
+process that may complete with a value at some point in the future when the user closes the dialog. Why would the API to
+fetch data from the user be any different than the API to fetch data from the server ?
+
+Opening a confirm dialog using that pattern is as simple as this :
+
+```javascript
+let ok = await confirm('Are you sure you want to do this ?');
+if (ok) {
+    // Do something
+}
+```
+
+You open the dialog by calling a function that returns a promise. The promise resolves to the value the user entered
+into the dialog when it is closed.
+
+That approach has several sadvantages :
+
+* It is concise.
+* A dialog can be opened from a parent Vue component, or not from a JS/TS file. It's just a function call.
+* There is a symmetry between requesting data from the user and from the server.
+* No need to alter the code of a parent component to accomodate for the presence of the dialog.
+* A parent component can use many dialogs without becoming a mess.
+
 ## Content of this repository
 
 You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs).
-Unfortunatly it hasn't been ported to Vue 3. This repository demonstrates how the basic functionality of that project
+Unfortunately it hasn't been ported to Vue 3. This repository demonstrates how the basic functionality of that project
 can be easily recovered in Vue 3. The code is published on NPM but it is so simple (60 lines of code for the core
 functionality !) you might as well copy paste it in your own project and customize it as you see fit.
 

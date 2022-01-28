@@ -1,4 +1,9 @@
 <template>
+  <p>
+    An example of dialogs built using this project. When you hit a button a function is called that opens the dialog and
+    returns a promise, when you close the dialog the promise resolves with the value entered into the dialog and that
+    value is printed below.
+  </p>
   <Button @click="onTestConfirm" label="Test confirm dialog" class="m-3"></Button>
   <Button @click="onTestText" label="Test prompt text dialog" class="m-3"></Button>
   <div class="console">
