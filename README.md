@@ -16,11 +16,15 @@ let data = await openMyDialog();
 npm i vue3-promise-dialog
 ```
 
-## Demo
+## Demos
 
-Showcases the small dialog collection included in this repository as examples : https://rlemaigre.github.io/vue3-promise-dialog/
+Showcases the small dialog collection included in this repository as examples :
 
-A Vite + Vue 3 + Typescript project on Stackblitz featuring a confirm dialog which is probably the simplest use case of the library : https://stackblitz.com/edit/vitejs-vite-nzzfdg?&terminal=dev
+https://rlemaigre.github.io/vue3-promise-dialog/
+
+A Vite + Vue 3 + Typescript project on Stackblitz featuring a confirm dialog which is probably the simplest use case of the library :
+
+https://stackblitz.com/edit/vitejs-vite-nzzfdg?&terminal=dev
 
 ## Introduction
 
