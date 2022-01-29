@@ -59,3 +59,15 @@ export function openDialog<C extends DefineComponent<any, any, any, any, any>>(d
         }
     });
 }
+
+export const PromiseDialog = {
+    install: (app, options) => {
+        app.config.globalProperties.$close = (comp, alternateValue) => {
+            if (alternateValue !== undefined) {
+                closeDialog(alternateValue);
+            } else {
+                closeDialog(comp.returnValue());
+            }
+        }
+    }
+}
