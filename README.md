@@ -100,6 +100,16 @@ collection.
 
 ## Using the library
 
+### Plugin
+
+Install the plugin like this :
+
+```typescript
+app.use(PromiseDialog);
+```
+
+The plugin defines the `$close` global function and makes it available in all components.
+
 ### DialogWrapper
 
 Your dialogs will open inside a `DialogWrapper` component. Include the `DialogWrapper` component at the root of your vue
