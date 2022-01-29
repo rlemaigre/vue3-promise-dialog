@@ -19,6 +19,13 @@ export default defineComponent({
     text: String
   },
   setup(props, context) {
+    function returnValue() {
+      return true;
+    }
+
+    return {
+      returnValue
+    }
   }
 })
 </script>

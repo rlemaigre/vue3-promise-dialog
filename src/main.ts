@@ -7,9 +7,11 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import PromiseDialog from "../lib/plugins/PromiseDialog";
 
 let app = createApp(App);
 app.use(PrimeVue);
+app.use(PromiseDialog);
 app.component("Button", Button);
 app.component("InputText", InputText);
 app.mount('#app')

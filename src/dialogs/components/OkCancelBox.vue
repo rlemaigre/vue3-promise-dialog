@@ -9,8 +9,9 @@
       </div>
       <div class="footer">
         <Button :label="cancelLabel" type="button" class="p-button-raised" style="margin-right: 10px"
-                @click="closeDialog(null)"/>
-        <Button :label="okLabel" type="submit" class="p-button-raised" @click="closeDialog(value)" :disabled="!valid"/>
+                @click="$close(this.$parent, null)"/>
+        <Button :label="okLabel" type="submit" class="p-button-raised" @click="$close(this.$parent)"
+                :disabled="!valid"/>
       </div>
     </form>
   </Box>
@@ -18,13 +19,11 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import {closeDialog} from "../../../lib/index";
 import Box from "./Box.vue";
 
 export default defineComponent({
   components: {Box},
   props: {
-    value: {},
     valid: {
       type: Boolean,
       default: true
@@ -39,9 +38,6 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    return {
-      closeDialog
-    }
   }
 })
 </script>

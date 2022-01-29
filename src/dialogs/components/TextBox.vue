@@ -1,5 +1,5 @@
 <template>
-  <OkCancelBox :value="text" :valid="!!text">
+  <OkCancelBox :valid="!!text">
     <template #header>Input</template>
     <template #body>
       <div style="padding: 20px">
@@ -19,12 +19,21 @@ import OkCancelBox from "./OkCancelBox.vue";
 export default defineComponent({
   components: {OkCancelBox},
   props: {
-    label: String
+    label: {
+      type: String,
+      required: true
+    }
   },
   setup(props, context) {
     const text = ref("");
+
+    function returnValue() {
+      return text.value;
+    }
+
     return {
-      text
+      text,
+      returnValue
     }
   }
 })

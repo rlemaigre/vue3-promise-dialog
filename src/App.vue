@@ -18,7 +18,6 @@ import {defineComponent, reactive} from "vue";
 import DialogWrapper from "../lib/components/DialogWrapper.vue";
 import {confirm, promptText} from "./dialogs/ts/dialogs";
 
-
 export default defineComponent({
   components: {DialogWrapper},
   props: {},
@@ -34,16 +33,15 @@ export default defineComponent({
     }
 
     async function onTestText() {
-      let text = await promptText('Enter some text');
+      let text = await promptText("Enter some text");
       if (text) {
         items.push(text)
       }
     }
 
     return {
-      confirm,
-      onTestConfirm,
       onTestText,
+      onTestConfirm,
       items
     }
   }

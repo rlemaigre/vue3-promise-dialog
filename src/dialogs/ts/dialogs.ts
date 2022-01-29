@@ -1,15 +1,11 @@
-import {openDialogFunction} from "../../../lib/index";
+import {openDialog} from "../../../lib/ts/lib";
 import ConfirmBox from "../components/ConfirmBox.vue";
 import TextBox from "../components/TextBox.vue";
 
-export const openConfirmDialog = openDialogFunction<{ text: string }, boolean>(ConfirmBox);
-
 export async function confirm(text: string) {
-    return await openConfirmDialog({text})
+    return await openDialog(ConfirmBox, {text});
 }
 
-export const openTextDialog = openDialogFunction<{ label: string }, string>(TextBox);
-
 export async function promptText(label: string) {
-    return await openTextDialog({label})
+    return await openDialog(TextBox, {label});
 }
