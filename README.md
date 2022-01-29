@@ -134,6 +134,16 @@ resolve when the dialog is closed.
 let result = await openDialog(MyDialog, myProps);
 ```
 
+If you wish to make the call more user-friendly, you may wrap the openDialog function call into another function that hides the details of the dialog component in use. For example, to open a confirm dialog, you may define a `confirm` function :
+
+```typescript
+export async function confirm(text: string) {
+    return await openDialog(ConfirmDialog, {text});
+}
+
+let ok = await confirm("Are you sure ?");
+```
+
 ### Closing dialogs
 
 Your dialog must define a `returnValue` function. You may do so either in the setup function using Composition API or as
