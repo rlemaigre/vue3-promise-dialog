@@ -78,8 +78,8 @@ The promise resolves to the value the user entered into the dialog when it is cl
 That approach has several advantages :
 
 * It is concise.
-* A dialog can be opened from a parent Vue component, or not from any JS/TS file. It's just a function call.
-* There is symmetry between requesting data from the user and from the server.
+* A dialog can be opened from a parent Vue component, or from any JS/TS file. It's just a function call.
+* There is a pleasing symmetry between requesting data from the user and from the server.
 * No need to alter the code of a parent component to accommodate for the presence of the dialog.
 * A parent component can use many dialogs without becoming a mess.
 
@@ -87,13 +87,11 @@ That approach has several advantages :
 
 You may be familiar with the following Vue 2 project : [vue-modal-dialog](https://github.com/hjkcai/vue-modal-dialogs).
 Unfortunately it hasn't been ported to Vue 3. This repository demonstrates how the basic functionality of that project
-can be easily recovered in Vue 3. The code is published on NPM but it is so simple (60 lines of code for the core
-functionality !) you might as well copy paste it into your own project and customize it as you see fit.
+can be easily recovered in Vue 3.
 
 ## Directory structure
 
-The core functionality is in the `lib` folder. There are only two small files : `lib.ts` and `DialogWrapper.vue`. These
-two files are published on NPM.
+The core functionality is in the `lib` folder.
 
 An example of a small dialog collection built upon the core functionality is in the `src/dialogs` folder. It is not
 published on NPM since it is dependent on PrimeVue (for buttons and text fields) which you may not be using and the look
@@ -122,8 +120,6 @@ use `:transition-attrs="{name: 'dialog'}"`.
 
 ### Dialog
 
-This library imposes no constraints on your dialog components.
-
 A dialog is just a standard component that may be transitioned into view. It may be a simple div that you center with
 position: fixed. You may add a dark overlay below it to make the div stand out. Whatever. To animate the dialog
 appearance and disappearance, use the CSS class names applied by Vue according to the name of the transition defined by
@@ -131,40 +127,24 @@ DialogWrapper (`dialog` in my example, so `dialog-enter-from`, `dialog-leave-to`
 
 ### Opening dialogs
 
-To turn your dialog components into async functions that return promises, use the `openDialogFunction` helper.
-
-For example, suppose you have a `TextBox` dialog, with a `label` prop that prompts the user for a text. This is how you
-may create the async function that will open it :
+To open a dialog X passing it some props, call `openDialog(X, props)`. The function will return a promise that will
+resolve when the dialog is closed.
 
 ```typescript
-export const openTextDialog = openDialogFunction<{ label: string }, string>(TextBox);
-```
-
-Use the function like so whenever you want to open the dialog and await the result :
-
-```typescript
-let text = await openTextDialog({label: 'Please enter some text'})
-```
-
-If you think this isn't concise enough you may declare this additional function :
-
-```typescript
-export async function promptText(label: string) {
-    return await openTextDialog({label})
-}
-```
-
-Use the function like so :
-
-```typescript
-let text = await promptText('Please enter some text');
+let result = await openDialog(MyDialog, myProps);
 ```
 
 ### Closing dialogs
 
-Inside your dialog components, you may call `closeDialog(...)` when you want to close the dialog and resolve the
-promise. The promise will resolve with whatever value you passed to `closeDialog`, typically what the user has entered
-in the input controls of the dialog or null if the user clicked cancel.
+Your dialog must define a `returnValue` function. You may do so either in the setup function using Composition API or as
+a method using Options API. To close the dialog, call `$close(this)`. When you do so, the promise will resolve to the
+result of the `returnValue` function. You may also resolve the promise to something else (for example null) by passing a
+value as second argument to `$close`.
+
+### Typescript
+
+The `openDialog` function will infer the types of the props and the return type from the component definition. It is
+type safe. Your IDE will complain if you pass in a wrong prop or assign the result to a variable of the wrong type.
 
 ## Dialog collection
 
@@ -179,29 +159,18 @@ for the centered div. It has one slot which is the content of the centered div.
 
 ### OkCancelBox.vue
 
-The OkCancelBox.vue component serves as base for all dialogs that include OK and CANCEL buttons. It has two
-slots : `header` and `body`. Body is where the controls of the dialog reside. It has two props : `value` and `valid`
-. `value` defines what the promise must resolve to when the ok button is clicked. It is a summary of the current values
-in the controls located in the body slot provided by the parent component. `valid` defines if the value is valid. The Ok
-button is disabled with valid is false. The whole thing is included into a `form` tag so that hitting enter when a
-control has focus triggers a click on the OK button. When OK is clicked, the `closeDialog` function is called with value
-as parameter, which closes the dialog and resolves the promise. When CANCEL is clicked, the `closeDialog` function is
-called with null as parameter.
+The OkCancelBox.vue component is a Box that serves as base for all dialogs that include OK and CANCEL buttons. It has
+two slots : `header` and `body`. Body is where the controls of the dialog reside. It has a `valid` prop. If `valid` is
+false, the OK button is disabled. The whole thing is included into a `form` tag so that hitting enter when a control has
+focus triggers a click on the OK button. When OK is clicked, `$close` is called on the parent component (the dialog).
+When CANCEL is clicked, `$close` is called on the parent component (the dialog) with a null return value.
 
-### ConfirmBox.vue
+### ConfirmDialog.vue
 
-A ConfirmBox is an OkCancelBox with a label and a value prop that is always true. So the promise resolves to true if the
-user clicks OK and to null if the use clicks CANCEL.
+A ConfirmDialog is an OkCancelBox with a label and a `returnValue` function that returns always true. So the promise
+resolves to true if the user clicks OK and to null if the use clicks CANCEL.
 
-### TextBox.vue
+### TextDialog.vue
 
-A TextBox is an OkCancelBox with a text field. The value passed to the OkCancelBox prop is the value of the text field.
-If the text field is empty, the valid prop is set to false.
-
-
-
-
-
-
-
-
+A TextBox is an OkCancelBox with a text field and a `returnValue` function that returns the content of the text field.
+If the text field is empty, the valid prop is set to false on OkCancelBox.
