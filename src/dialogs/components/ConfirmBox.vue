@@ -18,13 +18,9 @@ export default defineComponent({
   props: {
     text: String
   },
-  setup(props, context) {
-    function returnValue() {
+  methods: {
+    returnValue() {
       return true;
-    }
-
-    return {
-      returnValue
     }
   }
 })
