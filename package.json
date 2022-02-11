@@ -1,17 +1,17 @@
 {
   "name": "vue3-promise-dialog",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build-lib": "vite build --config vite-lib.config.ts && tsc lib/ts/lib.ts --declaration --emitDeclarationOnly --outDir dist",
+    "build-lib": "vite build --config vite-lib.config.ts",
     "preview": "vite preview"
   },
   "files": [
     "dist"
   ],
   "main": "./dist/vue3-promise-dialog.umd.js",
-  "types": "dist/lib.d.ts",
+  "types": "./dist/lib/index.d.ts",
   "module": "./dist/vue3-promise-dialog.es.js",
   "exports": {
     ".": {
@@ -32,7 +32,8 @@
     "primevue": "^3.11.0",
     "tslib": "^2.3.1",
     "primeflex": "^3.1.2",
-    "vue-tsc": "^0.31.1"
+    "vue-tsc": "^0.31.1",
+    "vite-plugin-dts": "^0.9.9"
   },
   "keywords": [
     "vue",

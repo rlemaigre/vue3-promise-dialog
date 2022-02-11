@@ -1,5 +1,6 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts';
 import pkg from './package.json';
 
 const path = require('path')
@@ -17,11 +18,16 @@ export default defineConfig({
     },
     plugins: [
         vue(),
+        dts({
+            logDiagnostics: true,
+            include: ['lib/**/*', 'lib/components/*'],
+        }),
     ],
     build: {
         lib: {
             entry: path.resolve(__dirname, 'lib/index.ts'),
             name,
+            formats: ['es'],
             fileName: (format) => name + `.${format}.js`,
         },
         rollupOptions: {

@@ -1,7 +1,7 @@
 import {Component, shallowRef} from "vue";
 import {DefineComponent} from "@vue/runtime-core";
 
-interface DialogInstance {
+export interface DialogInstance {
     dialog: Component;
     wrapper: string;
     props: any;
