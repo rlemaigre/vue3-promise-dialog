@@ -9,8 +9,8 @@
       </div>
       <div class="footer">
         <Button :label="cancelLabel" type="button" class="p-button-raised" style="margin-right: 10px"
-                @click="$close(null)"/>
-        <Button :label="okLabel" type="submit" class="p-button-raised" @click="$close()"
+                @click="closeDialog(null)"/>
+        <Button :label="okLabel" type="submit" class="p-button-raised" @click="closeDialog()"
                 :disabled="!valid"/>
       </div>
     </form>
@@ -20,6 +20,7 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import Box from "./Box.vue";
+import {closeDialog} from "../../../lib/index";
 
 export default defineComponent({
   components: {Box},
@@ -38,6 +39,9 @@ export default defineComponent({
     }
   },
   setup(props, context) {
+    return {
+      closeDialog
+    }
   }
 })
 </script>
