@@ -1,14 +1,15 @@
 <template>
   <transition v-bind="transitionAttrs">
     <component :is="dialogRef.dialog" v-if="dialogRef && dialogRef.wrapper === name"
-               v-bind="dialogRef.props"></component>
+               v-bind="dialogRef.props"
+               ref="dialogInstance"></component>
   </transition>
 </template>
 
 <script lang="ts">
 
-import {defineComponent} from "vue";
-import {dialogRef} from "../ts/lib";
+import { ComponentPublicInstance, defineComponent, ref, watch } from "vue";
+import { dialogRef } from "../ts/lib";
 
 export default defineComponent({
   name: 'DialogWrapper',
@@ -20,9 +21,18 @@ export default defineComponent({
     },
     transitionAttrs: Object
   },
-  setup(props, context) {
+  setup() {
+    const dialogInstance = ref<ComponentPublicInstance<typeof dialogRef.value.dialog>>();
+
+    watch(dialogInstance, () => {
+      if (dialogRef.value) {
+        dialogRef.value.comp = dialogInstance.value
+      }
+    })
+
     return {
-      dialogRef
+      dialogRef,
+      dialogInstance
     }
   }
 })

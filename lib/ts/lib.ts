@@ -1,7 +1,8 @@
-import {Component, shallowRef} from "vue";
+import { Component, shallowRef } from "vue";
 import {DefineComponent} from "@vue/runtime-core";
 
 export interface DialogInstance {
+    comp?: any; //TODO
     dialog: Component;
     wrapper: string;
     props: any;
@@ -14,6 +15,9 @@ export const dialogRef = shallowRef<DialogInstance>();
  * Closes the currently opened dialog, resolving the promise with the given data.
  */
 export function closeDialog(data: any) {
+    if (data === undefined) {
+        data = dialogRef.value.comp.returnValue();
+    }
     dialogRef.value.resolve(data);
     dialogRef.value = null;
 }
@@ -44,7 +48,7 @@ type ReturnType<C extends DefineComponent<any, any, any, any, any>> = BindingRet
 
 /**
  * Opens a dialog.
- * @param dialog The dialog yo want to open.
+ * @param dialog The dialog you want to open.
  * @param props The props to be passed to the dialog.
  * @param wrapper The dialog wrapper you want the dialog to open into.
  * @return A promise that resolves when the dialog is closed
@@ -62,11 +66,11 @@ export function openDialog<C extends DefineComponent<any, any, any, any, any>>(d
 
 export const PromiseDialog = {
     install: (app, options) => {
-        app.config.globalProperties.$close = (comp, alternateValue) => {
+        app.config.globalProperties.$close = (alternateValue) => {
             if (alternateValue !== undefined) {
                 closeDialog(alternateValue);
             } else {
-                closeDialog(comp.returnValue());
+                closeDialog(dialogRef.value.comp.returnValue());
             }
         }
     }

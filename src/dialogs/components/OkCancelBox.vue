@@ -9,8 +9,8 @@
       </div>
       <div class="footer">
         <Button :label="cancelLabel" type="button" class="p-button-raised" style="margin-right: 10px"
-                @click="$close(this.$parent, null)"/>
-        <Button :label="okLabel" type="submit" class="p-button-raised" @click="$close(this.$parent)"
+                @click="$close(null)"/>
+        <Button :label="okLabel" type="submit" class="p-button-raised" @click="$close()"
                 :disabled="!valid"/>
       </div>
     </form>
