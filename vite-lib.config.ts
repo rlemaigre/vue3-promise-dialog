@@ -9,7 +9,7 @@ const path = require('path')
 const name = pkg.name;
 
 // On reprend toutes les dépendances à externaliser de package.json :
-const external = Object.keys(pkg.dependencies || {});
+const external = Object.keys({...pkg.dependencies, ...pkg.peerDependencies} || {});
 
 export default defineConfig({
     base: '',
