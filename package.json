@@ -19,8 +19,8 @@
       "require": "./dist/vue3-promise-dialog.umd.js"
     }
   },
-  "dependencies": {
-    "vue": "^3.2.26"
+  "peerDependencies": {
+    "vue": "^3.x"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
