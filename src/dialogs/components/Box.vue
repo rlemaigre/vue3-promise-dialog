@@ -7,14 +7,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {},
-  props: {},
-  setup(props, context) {
-  }
-})
+  props: undefined,
+  setup(props, context) {},
+});
 </script>
 
 <style scoped lang="scss">
@@ -38,12 +37,12 @@ export default defineComponent({
   }
 }
 
-.dialog-enter-from.wrapper, .dialog-leave-to.wrapper {
+.dialog-enter-from.wrapper,
+.dialog-leave-to.wrapper {
   opacity: 0;
 
   .centered {
     transform: translate(-50%, -50%) scale(0.5);
   }
 }
-
 </style>

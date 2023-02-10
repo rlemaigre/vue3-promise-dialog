@@ -8,42 +8,52 @@
         <slot name="body"></slot>
       </div>
       <div class="footer">
-        <Button :label="cancelLabel" type="button" class="p-button-raised" style="margin-right: 10px"
-                @click="closeDialog(null)"/>
-        <Button :label="okLabel" type="submit" class="p-button-raised" @click="closeDialog()"
-                :disabled="!valid"/>
+        <Button
+          :label="cancelLabel"
+          type="button"
+          class="p-button-raised"
+          style="margin-right: 10px"
+          @click="closeDialog(null)"
+        />
+        <Button
+          :label="okLabel"
+          type="submit"
+          class="p-button-raised"
+          @click="closeDialog()"
+          :disabled="!valid"
+        />
       </div>
     </form>
   </Box>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import Box from "./Box.vue";
-import {closeDialog} from "../../../lib/index";
+import { closeDialog } from "../../../lib/index";
 
 export default defineComponent({
-  components: {Box},
+  components: { Box },
   props: {
     valid: {
       type: Boolean,
-      default: true
+      default: true,
     },
     okLabel: {
       type: String,
-      default: 'OK'
+      default: "OK",
     },
     cancelLabel: {
       type: String,
-      default: 'CANCEL'
-    }
+      default: "CANCEL",
+    },
   },
   setup(props, context) {
     return {
-      closeDialog
-    }
-  }
-})
+      closeDialog,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">
