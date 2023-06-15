@@ -35,6 +35,8 @@ type PropsType<C extends Component> = C extends new (...args: any) => any
       InstanceType<C>["$props"],
       keyof VNodeProps | keyof AllowedComponentProps
     >
+  : C extends (__VLS_props: infer U) => any
+  ? U
   : never;
 
 /**
@@ -46,12 +48,13 @@ type BindingReturnType<C extends Component> = C extends new (
   ? InstanceType<C> extends { returnValue: () => infer Y }
     ? Y
     : never
+  : C extends (
+      __VLS_props: any,
+      __VLS_ctx: any,
+      __VLS_setup: { expose: (exposed: { returnValue: () => infer Y }) => any }
+    ) => any
+  ? Y
   : never;
-
-/**
- * Extracts the return type of the dialog either from the setup method or from the methods.
- */
-type ReturnType<C extends Component> = BindingReturnType<C>;
 
 /**
  * Opens a dialog.
@@ -64,7 +67,7 @@ export function openDialog<C extends Component>(
   dialog: C,
   props?: PropsType<C>,
   wrapper: string = "default"
-): Promise<ReturnType<C>> {
+): Promise<BindingReturnType<C>> {
   return new Promise((resolve) => {
     dialogRefs.push({
       dialog,

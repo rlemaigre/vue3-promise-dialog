@@ -5,21 +5,19 @@
     close the dialog the promise resolves with the value entered into the dialog
     and that value is printed below.
   </p>
+  <Button @click="onTestConfirm" label="Test confirm dialog" class="m-3" />
+  <Button @click="onTestText" label="Test prompt text dialog" class="m-3" />
+  <Button @click="onNestedDialog" label="Test nested dialogs" class="m-3" />
   <Button
-    @click="onTestConfirm"
-    label="Test confirm dialog"
+    @click="onGenericDialogNumber"
+    label="Test generic dialog (number)"
     class="m-3"
-  ></Button>
+  />
   <Button
-    @click="onTestText"
-    label="Test prompt text dialog"
+    @click="onGenericDialogString"
+    label="Test generic dialog (string)"
     class="m-3"
-  ></Button>
-  <Button
-    @click="onNestedDialog"
-    label="Test nested dialogs"
-    class="m-3"
-  ></Button>
+  />
   <div class="console">
     <div class="console-item" v-for="(text, index) in items" :key="index">
       {{ text }}
@@ -31,7 +29,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import DialogWrapper from "../lib/components/DialogWrapper.vue";
-import { confirm, nested, promptText } from "./dialogs/ts/dialogs";
+import { confirm, generic, nested, promptText } from "./dialogs/ts/dialogs";
 
 export default defineComponent({
   components: { DialogWrapper },
@@ -61,10 +59,26 @@ export default defineComponent({
       }
     }
 
+    async function onGenericDialogNumber() {
+      let text = await generic(10.5);
+      if (text) {
+        items.push(text.toFixed(2));
+      }
+    }
+
+    async function onGenericDialogString() {
+      let text = await generic("");
+      if (text) {
+        items.push(text);
+      }
+    }
+
     return {
       onTestText,
       onTestConfirm,
       onNestedDialog,
+      onGenericDialogNumber,
+      onGenericDialogString,
       items,
     };
   },
