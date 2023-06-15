@@ -36,7 +36,7 @@ type PropsType<C extends Component> = C extends new (...args: any) => any
       keyof VNodeProps | keyof AllowedComponentProps
     >
   : C extends (__VLS_props: infer U) => any
-  ? U
+  ? Omit<U, keyof VNodeProps | keyof AllowedComponentProps>
   : never;
 
 /**
@@ -48,12 +48,10 @@ type BindingReturnType<C extends Component> = C extends new (
   ? InstanceType<C> extends { returnValue: () => infer Y }
     ? Y
     : never
-  : C extends (
-      __VLS_props: any,
-      __VLS_ctx: any,
-      __VLS_setup: { expose: (exposed: { returnValue: () => infer Y }) => any }
-    ) => any
-  ? Y
+  : C extends (__VLS_props: any, __VLS_ctx: any, __VLS_setup: infer Y) => any
+  ? Y extends { expose: (exposed: { returnValue: () => infer Q }) => any }
+    ? Q
+    : never
   : never;
 
 /**
