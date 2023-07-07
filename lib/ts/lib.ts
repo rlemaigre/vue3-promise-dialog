@@ -15,9 +15,9 @@ export const dialogRef = shallowRef<DialogInstance>();
  * Closes the currently opened dialog, resolving the promise with the return value of the dialog, or with the given
  * data if any.
  */
-export function closeDialog(data?: any) {
+export function closeDialog(data?: any): void {
     if (data === undefined) {
-        data = dialogRef.value.comp.returnValue();
+        data = 'function' === typeof dialogRef.value.comp.returnValue ? dialogRef.value.comp.returnValue() : undefined;
     }
     dialogRef.value.resolve(data);
     dialogRef.value = null;
