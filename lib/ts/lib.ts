@@ -7,7 +7,10 @@ export interface DialogInstance {
     wrapper: string;
     props: any;
     resolve: (data: any) => void;
+    reject: (err: Error) => void;
 }
+
+export class DismissedDialog extends Error {}
 
 export const dialogRef = shallowRef<DialogInstance>();
 
@@ -15,12 +18,33 @@ export const dialogRef = shallowRef<DialogInstance>();
  * Closes the currently opened dialog, resolving the promise with the return value of the dialog, or with the given
  * data if any.
  */
-export function closeDialog(data?: any) {
+export function resolveDialog(data?: any): void {
     if (data === undefined) {
         data = dialogRef.value.comp.returnValue();
     }
     dialogRef.value.resolve(data);
     dialogRef.value = null;
+}
+
+/**
+ * Closes the currently opened dialog, rejecting the promise with a DismissedDialog error, or with the given
+ * error if any.
+ */
+export function rejectDialog(err?: Error): void {
+    dialogRef.value.reject(err ?? new DismissedDialog('Dialog was dismissed.'));
+    dialogRef.value = null;
+}
+
+/**
+ * This is kept for backward compatility. Call either `resolveDialog()` or `rejectDialog()` instead.
+ * @deprecated
+ */
+export function closeDialog(data?: any): void {
+    if (data instanceof Error) {
+        rejectDialog(data);
+    } else {
+        resolveDialog(data);
+    }
 }
 
 /**
@@ -55,12 +79,13 @@ type ReturnType<C extends DefineComponent<any, any, any, any, any>> = BindingRet
  * @return A promise that resolves when the dialog is closed
  */
 export function openDialog<C extends DefineComponent<any, any, any, any, any>>(dialog: C, props?: PropsType<C>, wrapper: string = 'default'): Promise<ReturnType<C>> {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         dialogRef.value = {
             dialog,
             props,
             wrapper,
-            resolve
+            resolve,
+            reject
         }
     });
 }
