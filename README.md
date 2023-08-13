@@ -162,6 +162,15 @@ value to `closeDialog()`.
 The `openDialog` function will infer the types of the props and the return type from the component definition. It is
 type safe. Your IDE will complain if you pass in a wrong prop or assign the result to a variable of the wrong type.
 
+### Usage with script setup
+If using <script setup> it is necessary to expose the returnValue function in the following way.
+
+```typescript
+defineExpose({
+    returnValue: () => { return true },
+});
+```
+
 ## Dialog collection
 
 Although none of this is published on NPM for reasons mentioned above, this section describes briefly the few dialogs
