@@ -1,9 +1,4 @@
-import DialogWrapper from "./components/DialogWrapper.vue"
-import {openDialog, closeDialog, PromiseDialog} from "./ts/lib";
+import DialogWrapper from "./components/DialogWrapper.vue";
+import { openDialog, closeDialog, PromiseDialog } from "./ts/lib";
 
-export {
-    DialogWrapper,
-    PromiseDialog,
-    openDialog,
-    closeDialog
-}
+export { DialogWrapper, PromiseDialog, openDialog, closeDialog };

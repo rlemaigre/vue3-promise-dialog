@@ -1,43 +1,36 @@
 <template>
-  <transition v-bind="transitionAttrs">
-    <component :is="dialogRef.dialog" v-if="dialogRef && dialogRef.wrapper === name"
-               v-bind="dialogRef.props"
-               ref="dialogInstance"></component>
-  </transition>
+  <template v-for="(dialogRef, index) in dialogRefs" :key="index">
+    <transition v-bind="transitionAttrs">
+      <component
+        :is="dialogRef.dialog"
+        v-if="dialogRef && dialogRef.wrapper === name"
+        v-bind="dialogRef.props"
+        :ref="(ref: any) => (dialogRef.comp = ref)"
+      ></component>
+    </transition>
+  </template>
 </template>
 
 <script lang="ts">
-
-import { ComponentPublicInstance, defineComponent, ref, watch } from "vue";
-import { dialogRef } from "../ts/lib";
+import { defineComponent } from "vue";
+import { dialogRefs } from "../ts/lib";
 
 export default defineComponent({
-  name: 'DialogWrapper',
+  name: "DialogWrapper",
   components: {},
   props: {
     name: {
       type: String,
-      default: 'default'
+      default: "default",
     },
-    transitionAttrs: Object
+    transitionAttrs: Object,
   },
   setup() {
-    const dialogInstance = ref<ComponentPublicInstance<typeof dialogRef.value.dialog>>();
-
-    watch(dialogInstance, () => {
-      if (dialogRef.value) {
-        dialogRef.value.comp = dialogInstance.value
-      }
-    })
-
     return {
-      dialogRef,
-      dialogInstance
-    }
-  }
-})
+      dialogRefs,
+    };
+  },
+});
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

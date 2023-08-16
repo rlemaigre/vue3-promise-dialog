@@ -16,7 +16,7 @@ let data = await openMyDialog();
 
 ## Installation
 
-```
+```sh
 npm i vue3-promise-dialog
 ```
 
@@ -24,11 +24,11 @@ npm i vue3-promise-dialog
 
 Showcases the small dialog collection included in this repository as examples :
 
-https://rlemaigre.github.io/vue3-promise-dialog/
+<https://rlemaigre.github.io/vue3-promise-dialog/>
 
 A Vite + Vue 3 + Typescript project on Stackblitz featuring a confirm dialog which is probably the simplest use case of the library :
 
-https://stackblitz.com/edit/vitejs-vite-nzzfdg?&terminal=dev
+<https://stackblitz.com/edit/vitejs-vite-nzzfdg?&terminal=dev>
 
 ## Introduction
 
@@ -56,9 +56,9 @@ That approach has several disadvantages :
 * There is no symmetry between requesting data from the user and from the server, yet it is the same kind of
   asynchronous process that yields a value.
 * Everywhere you need to use the dialog, you need to set up some logic in the parent component :
-    * The dialog tag in the template
-    * A ref that controls the dialog visibility
-    * Callbacks that handle clicks on dialog buttons
+  * The dialog tag in the template
+  * A ref that controls the dialog visibility
+  * Callbacks that handle clicks on dialog buttons
 * Things get nasty when a parent component needs to use several dialogs.
 
 ### Dialogs using promises
