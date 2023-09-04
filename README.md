@@ -157,9 +157,12 @@ let ok = await confirm("Are you sure ?");
 ### Closing dialogs
 
 Your dialog must define a `returnValue` function. You may do so either in the setup function using Composition API or as
-a method using Options API. To close the dialog, call `closeDialog()`. When you do so, the promise will resolve to the
+a method using Options API. To close the dialog, call `resolveDialog()`. When you do so, the promise will resolve to the
 result of the `returnValue` function. You may also resolve the promise to something else (for example null) by passing a
-value to `closeDialog()`.
+value to `resolveDialog()`. 
+
+Alertnatively, you can call `rejectDialog()`. This will throw a `DismissedDialog` error (you can also pass your own error as an argument),
+meaning your promise won't be resolved, but rejected. As a result, the dialog will be closed as well.
 
 ### Typescript
 
@@ -191,8 +194,8 @@ for the centered div. It has one slot which is the content of the centered div.
 The OkCancelBox.vue component is a Box that serves as base for all dialogs that include OK and CANCEL buttons. It has
 two slots : `header` and `body`. Body is where the controls of the dialog reside. It has a `valid` prop. If `valid` is
 false, the OK button is disabled. The whole thing is included into a `form` tag so that hitting enter when a control has
-focus triggers a click on the OK button. When OK is clicked, `closeDialog` is called.
-When CANCEL is clicked, `closeDialog` is called with a null return value.
+focus triggers a click on the OK button. When OK is clicked, `resolveDialog` is called.
+When CANCEL is clicked, `resolveDialog` is called with a null return value.
 
 ### ConfirmDialog.vue
 
