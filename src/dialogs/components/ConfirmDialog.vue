@@ -2,7 +2,7 @@
   <OkCancelBox :value="true" ok-label="YES" cancel-label="NO">
     <template #header>Confirm</template>
     <template #body>
-      <div style="padding: 20px;">
+      <div style="padding: 20px">
         {{ text }}
       </div>
     </template>
@@ -10,22 +10,20 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import OkCancelBox from "./OkCancelBox.vue";
 
 export default defineComponent({
-  components: {OkCancelBox},
+  components: { OkCancelBox },
   props: {
-    text: String
+    text: String,
   },
   methods: {
-    returnValue() {
+    returnValue(): true | null {
       return true;
-    }
-  }
-})
+    },
+  },
+});
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
